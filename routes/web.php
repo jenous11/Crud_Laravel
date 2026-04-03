@@ -15,4 +15,4 @@ Route::view('/contact','contact')->name('contact');
 Route::view('article', 'article')->name('article');
 
 //route to point to post controller
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
