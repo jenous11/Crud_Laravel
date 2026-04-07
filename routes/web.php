@@ -16,3 +16,5 @@ Route::view('article', 'article')->name('article');
 
 //route to point to post controller
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+Route::resource('posts', PostController::class);

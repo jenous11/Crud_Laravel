@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+public function index()
+    {
+        $posts=Post::latest('id')->get();
+        return view('index',compact('posts'));
+    }
+
     public function show(Post $post)  // Route Model Binding actual thing to learn
     // tyupe hinting laravel will automatically resolve the post by id from URL
     {
@@ -19,4 +25,25 @@ class PostController extends Controller
         // old way you already know
 // return view('post', ['post' => $post]);
     }
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+    public function edit(Post $post)
+    {
+        //
+    }
+    public function update(Request $request, Post $post)
+    {
+        //
+    }
+    public function destroy(Post $post)
+    {
+        //
+}
 }
