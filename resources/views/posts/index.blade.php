@@ -17,4 +17,4 @@ use Illuminate\Support\Str;
         @endforeach
     </section>
 </main>
-@endsection
+@endsection                                                                                                                                         

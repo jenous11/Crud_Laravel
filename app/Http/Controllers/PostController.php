@@ -11,14 +11,14 @@ class PostController extends Controller
 public function index()
     {
         $posts=Post::latest('id')->get();
-        return view('index',compact('posts'));
+        return view('posts.index',compact('posts'));
     }
 
     public function show(Post $post)  // Route Model Binding actual thing to learn
     // tyupe hinting laravel will automatically resolve the post by id from URL
     {
         // $post=Post::findOrFail($id); // find the post by id from URL if not found it will throw 404 error_clear_last
-        return view('post',compact('post')); // sends it to the view
+        return view('posts.post',compact('post')); // sends it to the view
         //what compact does
         // It takes a string of the variable name and automatically creates the array for you:
 
@@ -27,13 +27,22 @@ public function index()
     }
     public function create()
     {
-        //
+        // $title=$request('title');
+        return view('posts.create');
     }
 
     public function store(Request $request)
     {
-        //
+          // dd($request->all());
+      Post::create([
+        'title'=>$request->title,
+        'text'=>$request->text,
+        'category_id'=>$request->category_id]);
+
+return redirect()->route('posts.post');
+
     }
+
     public function edit(Post $post)
     {
         //
