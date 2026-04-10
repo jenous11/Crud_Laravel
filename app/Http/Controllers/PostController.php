@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Post;
+
 
 class PostController extends Controller
 {
@@ -42,7 +44,11 @@ class PostController extends Controller
 
   public function update(Request $request, Post $post)
   {
+  DB::update('UPDATE posts SET title = ?, text=?,category_id=? where id = ?',
+   [$request->title, $request->text, $request->category_id, $post->id]);
+ return redirect()->route('home');
   }
+
 
   public function destroy(Post $post)
   {
