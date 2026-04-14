@@ -9,7 +9,14 @@
         <p class="text-gray-600 mb-4">Published on <span class="font-semibold">{{ $post->created_at }}</span></p>
         <div class="text-gray-800 space-y-4">
           <p>{{$post->text}}</p>
-          <button class="bg-red-500"><a href={{ route('posts.edit',$post->id) }}>edit</a><button>
+
+          <button type="submit" class="text-blue-800"><a href={{ route('posts.edit',$post->id) }}>edit</a><button>
+          <form action="{{route('posts.destroy',$post->id) }}" method="POST" >
+            @csrf
+            @method('DELETE')
+      <button type="submit" class="text-red-500 ml-5" >delete<button>
+          </form>
+
         </div>
     </section>
 </main>

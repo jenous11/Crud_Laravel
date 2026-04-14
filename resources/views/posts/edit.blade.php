@@ -5,6 +5,7 @@
             <form action="{{ route('posts.update', $post->id) }}" method="POST">
                 @csrf
                 @method('PUT')
+            
                 title:
                 <input type="text" name="title" value={{ $post->title }} placeholder={{ $post->title }}>
                 <br>
