@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+
 use App\Models\Post;
 
 class PostController extends Controller
@@ -22,16 +22,18 @@ class PostController extends Controller
     return view('posts.create');
   }
 
-  public function store(Request $request)
-  {
-    // dd($request->all());
+public function store(Request $request)
+{
+    $imagePath = $request->file('image')->store('images', 'public');
+
     Post::create([
-      'title' => $request->title,
-      'text' => $request->text,
-      'category_id' => $request->category_id
+        'title' => $request->title,
+        'text' => $request->text,
+        'category_id' => $request->category_id,
+        'image' => $imagePath
     ]);
-    return redirect()->route('posts.post');
-  }
+    return redirect()->route('posts.index');
+}
 
   public function edit(Post $post)
   {
@@ -39,11 +41,21 @@ class PostController extends Controller
   }
 
 
-  public function update(Request $request, Post $post)
-  {
-    $post->update(['title'=>$request->title,'text'=>$request->text]);
+public function update(Request $request, Post $post)
+{
+    $data = [
+        'title' => $request->title,
+        'text' => $request->text,
+    ];
+    // only update image if a new one was uploaded
+    if($request->hasFile('image')){
+        $imagePath = $request->file('image')->store('images', 'public');
+        $data['image'] = $imagePath;
+    }
+
+    $post->update($data);
     return redirect()->route('posts.index');
-  }
+}
 
   public function destroy(Post $post)
   {

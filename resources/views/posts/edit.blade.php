@@ -5,7 +5,7 @@
             <form action="{{ route('posts.update', $post->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-            
+
                 title:
                 <input type="text" name="title" value={{ $post->title }} placeholder={{ $post->title }}>
                 <br>
@@ -15,6 +15,8 @@
                 category_id:
                 <input type="number" name="category_id" value={{ $post->category_id }}>
                 <br>
+                image:
+                <input type="file" name="image">
                 <button type="submit">Submit</button>
                 <br>
             </form>

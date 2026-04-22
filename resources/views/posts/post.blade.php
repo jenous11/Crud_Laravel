@@ -5,7 +5,15 @@
     <!-- Blog Article Section -->
     <section class="w-3/5 bg-white p-6 shadow-md rounded-lg">
         <h1 class="text-2xl font-bold mb-4">{{ $post->title }}</h1>
-        <img src="{{ asset('images/placeholder-800x400.png') }}" alt="Post Image" class="w-full object-cover rounded mb-4">
+
+        <img src="{{ asset('images/alexander-grey-P3IJy9JMsiU-unsplash.jpg') }}" alt="">
+@if($post->image)
+    <img src="{{ asset('images/'.$post->image) }}" class="w-full object-cover rounded mb-4">
+@else
+    <img src="{{ asset('images/placeholder-800x400.png') }}" class="w-full object-cover rounded mb-4">
+@endif
+
+
         <p class="text-gray-600 mb-4">Published on <span class="font-semibold">{{ $post->created_at }}</span></p>
         <div class="text-gray-800 space-y-4">
           <p>{{$post->text}}</p>
