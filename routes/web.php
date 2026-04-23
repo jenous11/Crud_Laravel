@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [PostController::class, 'index'])->name('home');
 // Route::view('/','layouts.app');
 Route::view('/about-us','about')->name('about');
 // Route::view('/about-us','about');

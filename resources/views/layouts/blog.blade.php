@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Homepage</title>
     <script src="https://cdn.tailwindcss.com"></script>
+          @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100">
 <header class="bg-white shadow-md p-4 flex justify-between items-center container mx-auto mt-6 rounded-lg">

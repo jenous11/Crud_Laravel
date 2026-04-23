@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class PostController extends Controller
 {
@@ -24,14 +25,19 @@ class PostController extends Controller
 
 public function store(Request $request)
 {
-    $imagePath = $request->file('image')->store('images', 'public');
-
-    Post::create([
+      dd($request->all(), $request->hasFile('image'), $request->file('image'));
+    $data = [
         'title' => $request->title,
         'text' => $request->text,
         'category_id' => $request->category_id,
-        'image' => $imagePath
-    ]);
+    ];
+
+    // only store image if one was uploaded
+    if($request->hasFile('image')){
+        $data['image'] = $request->file('image')->store('images', 'public');
+    }
+
+    Post::create($data);
     return redirect()->route('posts.index');
 }
 
@@ -47,10 +53,12 @@ public function update(Request $request, Post $post)
         'title' => $request->title,
         'text' => $request->text,
     ];
-    // only update image if a new one was uploaded
+
     if($request->hasFile('image')){
-        $imagePath = $request->file('image')->store('images', 'public');
-        $data['image'] = $imagePath;
+        if($post->image){
+            Storage::disk('public')->delete($post->image);
+        }
+        $data['image'] = $request->file('image')->store('images', 'public');
     }
 
     $post->update($data);
