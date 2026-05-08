@@ -26,7 +26,6 @@
               <li><a href="{{ route('home', ['category_id' => $category->id]) }} "
               class="text-gray-600 hover:text-gray-800 border-2 bg-white mb-2  rounded-sm  shadow-md "> {{ $category->name }}</a></li>
           @endforeach
-
         </ul>
     </aside>
 </main>

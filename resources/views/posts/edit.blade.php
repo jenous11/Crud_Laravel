@@ -17,8 +17,12 @@
                 text:
                 <input type="textarea" name="text" value={{ $post->text }} class=" border-2 border-solid w-80">
                 <br>
-                category_id:
-                <input type="number" name="category_id" value={{ $post->category_id }} class=" border-2 border-solid w-80">
+                categories:
+               <select id="category_id" class="border-2 w-80" name="category_id">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }} </option>
+                    @endforeach
+                </select>
                 <br>
                 image:
                 <input type="file" name="image" id="image" class="border-2 border-solid w-80" >

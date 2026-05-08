@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -20,50 +23,52 @@ class PostController extends Controller
 
   public function create()
   {
-    return view('posts.create');
+    $categories=Category::all();
+
+    return view('posts.create', compact('categories'));
+
   }
 
-public function store(Request $request)
-{
-      dd($request->all(), $request->hasFile('image'), $request->file('image'));
+  public function store(Request $request)
+  {
+    // dd($request->all(), $request->hasFile('image'), $request->file('image'));
+// dd($request->all());
     $data = [
-        'title' => $request->title,
-        'text' => $request->text,
-        'category_id' => $request->category_id,
+      'title' => $request->title,
+      'text' => $request->text,
+      'category_id' => $request->category_id,
     ];
-
     // only store image if one was uploaded
-    if($request->hasFile('image')){
-        $data['image'] = $request->file('image')->store('images', 'public');
+    if ($request->hasFile('image')) {
+      $data['image'] = $request->file('image')->store('images', 'public');
     }
-
     Post::create($data);
     return redirect()->route('posts.index');
-}
+  }
 
   public function edit(Post $post)
   {
-    return view('posts.edit',compact('post'));
+    $categories=Category::all();
+    // return view('posts.edit', compact('post'));
+
+    return view('posts.edit', compact('post','categories'));
   }
 
-
-public function update(Request $request, Post $post)
-{
+  public function update(Request $request, Post $post)
+  {
     $data = [
-        'title' => $request->title,
-        'text' => $request->text,
+      'title' => $request->title,
+      'text' => $request->text,
     ];
-
-    if($request->hasFile('image')){
-        if($post->image){
-            Storage::disk('public')->delete($post->image);
-        }
-        $data['image'] = $request->file('image')->store('images', 'public');
+    if ($request->hasFile('image')) {
+      if ($post->image) {
+        Storage::disk('public')->delete($post->image);
+      }
+      $data['image'] = $request->file('image')->store('images', 'public');
     }
-
     $post->update($data);
     return redirect()->route('posts.index');
-}
+  }
 
   public function destroy(Post $post)
   {
@@ -73,4 +78,8 @@ public function update(Request $request, Post $post)
     return redirect()->route('posts.index');
   }
 
+  public function passcategory()
+  {
+
+  }
 }
