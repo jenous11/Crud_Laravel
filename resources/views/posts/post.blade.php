@@ -12,15 +12,18 @@
                 @endif
                 <p class="text-gray-600 mb-4">Published on <span class="font-semibold">{{ $post->created_at }}</span></p>
                 <div class="text-gray-800 space-y-4">
-                    <p>{{ $post->text }}</p>
+                  <p>{{ $post->text }}</p>
+                  @if (Auth::id()==$post->user_id)
+
                     <button type="submit" class="text-blue-800"><a
-                            href={{ route('posts.edit', $post->id) }}>edit</a><button>
-                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 ml-5">delete<button>
-                            </form>
-                </div>
+                      href={{ route('posts.edit', $post->id) }}>edit</a><button>
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="text-red-500 ml-5">delete<button>
+                          </form>
+                        </div>
+                        @endif
         </section>
     </main>
 @endsection

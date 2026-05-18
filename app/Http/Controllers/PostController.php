@@ -38,6 +38,10 @@ class PostController extends Controller
   {
     // dd($request->all(), $request->hasFile('image'), $request->file('image'));
     // dd($request->all());
+    $request->validate([
+      'title' => 'required',
+      'text' => 'required'
+    ]);
     $data = [
       'title' => $request->title,
       'text' => $request->text,
@@ -68,6 +72,10 @@ class PostController extends Controller
     if (Auth::id() !== $post->user_id) {
       abort(403);
     }
+    $request->validate([
+      'title'=>'required',
+      'text'=>'required'
+    ]);
 
     $data = [
       'title' => $request->title,
@@ -94,5 +102,12 @@ class PostController extends Controller
     return redirect()->route('posts.index');
   }
 
-  public function passcategory() {}
+//  public function dashboard(Post $post) {
+// if(Auth::id()==$post->id){
+//    return view('posts.post', compact('post'));
+
+public function dashboard() {
+    $posts = Post::where('user_id', Auth::id())->get();
+    return view('dashboard', compact('posts'));
+}
 }

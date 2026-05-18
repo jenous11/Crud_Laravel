@@ -1,4 +1,3 @@
-
 @extends('layouts.blog')
 @section('content')
     <main class="container mx-auto mt-6 flex justify-center">
@@ -8,9 +7,15 @@
                 @csrf
                 title:
                 <input type="text" name="title" class=" border-2 border-solid w-80">
+                @error('title')
+                    <span>{{ $message }}</span>
+                @enderror
                 <br>
                 text:
                 <input type="textarea" name="text" class=" border-2 border-solid w-80">
+                 @error('title')
+                    <span>{{ $message }}</span>
+                @enderror
                 <br>
                 category:
                 {{-- <input type="number" name="category_id" class=" border-2 border-solid w-80" > --}}
