@@ -12,6 +12,7 @@
     <a href="{{ route('home') }}" class="text-2xl font-bold text-gray-800"> Blog</a>
     <nav>
         <ul class="flex space-x-4">
+            <li><a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-800">Login/Logout</a></li>
             <li><a href="{{ route('posts.create') }}" class="text-gray-600 hover:text-gray-800">Create</a></li>
             <li><a href="{{ route('about') }}" class="text-gray-600 hover:text-gray-800">About Us</a></li>
             <li><a href="{{ route('contact') }}" class="text-gray-600 hover:text-gray-800">Contact</a></li>
