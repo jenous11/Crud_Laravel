@@ -32,20 +32,20 @@
                             </div>
                         </button>
                     </x-slot>
-
                     <x-slot name="content">
-{{-- changinging --}}
 
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+{{-- changinging --}}
+    {{-- <x-dropdown-link :href="route('profile')">
+                                {{ __('profile') }}
+                            </x-dropdown-link> --}}
+
+
+
+
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-
-
 
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();

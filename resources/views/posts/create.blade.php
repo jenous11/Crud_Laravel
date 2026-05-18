@@ -1,3 +1,4 @@
+
 @extends('layouts.blog')
 @section('content')
     <main class="container mx-auto mt-6 flex justify-center">

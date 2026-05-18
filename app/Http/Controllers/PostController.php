@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth')->except(['index', 'show']);
+  }
   public function index()
   {
     $posts = Post::latest('id')->get();
@@ -23,20 +28,21 @@ class PostController extends Controller
 
   public function create()
   {
-    $categories=Category::all();
+    // dd('hit');
+    $categories = Category::all();
 
     return view('posts.create', compact('categories'));
-
   }
 
   public function store(Request $request)
   {
     // dd($request->all(), $request->hasFile('image'), $request->file('image'));
-// dd($request->all());
+    // dd($request->all());
     $data = [
       'title' => $request->title,
       'text' => $request->text,
       'category_id' => $request->category_id,
+      'user_id' => Auth::id(),
     ];
     // only store image if one was uploaded
     if ($request->hasFile('image')) {
@@ -48,14 +54,21 @@ class PostController extends Controller
 
   public function edit(Post $post)
   {
-    $categories=Category::all();
-    // return view('posts.edit', compact('post'));
+    if (Auth::id() !== $post->user_id) {
+      abort(403);
+    }
+    $categories = Category::all();
+    // return view('posts.edit', compact('post'));if
 
-    return view('posts.edit', compact('post','categories'));
+    return view('posts.edit', compact('post', 'categories'));
   }
 
   public function update(Request $request, Post $post)
   {
+    if (Auth::id() !== $post->user_id) {
+      abort(403);
+    }
+
     $data = [
       'title' => $request->title,
       'text' => $request->text,
@@ -72,14 +85,14 @@ class PostController extends Controller
 
   public function destroy(Post $post)
   {
+    if (Auth::id() !== $post->user_id) {
+      abort(403);
+    }
     // $post->delete($post);
     // dd('hit');
     $post->delete();
     return redirect()->route('posts.index');
   }
 
-  public function passcategory()
-  {
-
-  }
+  public function passcategory() {}
 }
