@@ -34,4 +34,5 @@ Route::put('/posts/{post}',[AdminController::class,'updatePost'])->name('admin.u
 
 
 Route::get('/dashboard',[PostController::class,'dashboard'])->middleware(['auth','verified'])->name('dashboard');
+
 require __DIR__.'/auth.php';
