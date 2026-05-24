@@ -1,6 +1,19 @@
 # Laravel Blog CRUD Application
+A blog application built with Laravel 12 and Laravel Breeze authentication.
 
-A full-featured blog application built with Laravel 12 and Laravel Breeze authentication.
+## Home Page
+![homepage](public/images/homepage.png)
+
+## Login Page
+![loginpage](public/images/loginpage.png)
+
+## Create Post
+![createpost](public/images/createpost.png)
+
+## Users Post
+![userspost](public/images/userposts.png)
+
+
 
 ## Features
 
@@ -60,7 +73,7 @@ php artisan serve
 - Visit `http://127.0.0.1:8000`
 - Register an account
 - Create, edit, delete your posts
-- To access admin panel — set `role` to `admin` in users table, then visit `/admin`
+
 
 ## Project Structure
 
@@ -87,4 +100,4 @@ resources/views/
 ## Author
 
 **Jenous Dangol**  
-[GitHub](https://github.com/jenous11) · [Email](mailto:jenousdongol11@gmail.com)
+
