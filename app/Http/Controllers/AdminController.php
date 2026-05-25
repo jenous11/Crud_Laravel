@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 
 use App\Models\Category;
 use App\Models\Post;
@@ -9,17 +7,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-
-
-class AdminController extends Controller
-{
+class AdminController extends Controller{
   public function index()
   {
     $users = User::all();
     $posts = Post::all();
     return view('admin.index', compact('users', 'posts'));
   }
-
 
   public function destroyPost(Post $post)
   {
