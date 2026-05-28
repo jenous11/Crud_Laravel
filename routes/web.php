@@ -31,7 +31,5 @@ Route::delete('/users/{user}',[AdminController::class,'destroyUser'])->name('adm
 Route::get('/posts/{post}/edit',[AdminController::class,'editPost'])->name('admin.editPost');
 Route::put('/posts/{post}',[AdminController::class,'updatePost'])->name('admin.updatePost');
 });
-
 Route::get('/dashboard',[PostController::class,'dashboard'])->middleware(['auth','verified'])->name('dashboard');
-
 require __DIR__.'/auth.php';
